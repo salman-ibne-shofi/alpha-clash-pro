@@ -11,8 +11,9 @@
 // }
 
 function handleKeyboardKeyUpEvent(event) {
+    // const playerPressed = event.key;
     const playerPressed = event.key;
-	console.log('playerPressed', playerPressed);
+	console.log(event.key);
 
     // get the expected to press
     const currentAlphabetElement = document.getElementById('current-alphabet');
@@ -22,8 +23,14 @@ function handleKeyboardKeyUpEvent(event) {
 
 
     // check matched or not
-    if(playPressed === expectedAlphabet){
+    if(playerPressed === expectedAlphabet){
         console.log('you get a point');
+        console.log('you have pressed correctly', expectedAlphabet);
+        removeBackgroundColorById(expectedAlphabet);
+        continueGame();
+    }
+    else{
+        console.log('dhurrr vaia va apu... right key press koro')
     }
 }
 
@@ -32,7 +39,7 @@ document.addEventListener("keyup", handleKeyboardKeyUpEvent);
 function continueGame() {
 	// step-1: generate a random alphabet
 	const alphabet = getArandomAlphabet();
-	console.log("your random alphabet", alphabet);
+	// console.log("your random alphabet", alphabet);
 
 	// set randomly generate alphabet to the screen (show it)
 	const currentAlphabetElement = document.getElementById("current-alphabet");
