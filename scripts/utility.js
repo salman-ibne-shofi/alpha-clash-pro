@@ -30,9 +30,10 @@ function setTextElementById(elementId, value) {
 	element.innerText = value;
 }
 
-function setElementTextById(elementId){
+function getElementTextById(elementId){
     const element = document.getElementById(elementId);
-    element.innerText = value;
+    const text = element.innerText;
+    return text;
 }
 
 function getArandomAlphabet() {
