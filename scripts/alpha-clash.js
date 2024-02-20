@@ -1,17 +1,24 @@
 function play() {
-// step-1: hide the home scren. to hide the screen add class hidden to the home section
-const homeSection = document.getElementById("home-screen");
-homeSection.classList.add("hidden");
+	// step-1: hide the home scren. to hide the screen add class hidden to the home section
+	const homeSection = document.getElementById("home-screen");
+	homeSection.classList.add("hidden");
 
-// show the playground
-const playgroundSection = document.getElementById("play-ground");
-playgroundSection.classList.remove('hidden');
-console.log(playgroundSection.classList)
+	// show the playground
+	const playgroundSection = document.getElementById("play-ground");
+	playgroundSection.classList.remove("hidden");
+	console.log(playgroundSection.classList);
 }
 
 function handleKeyboardKeyUpEvent(event) {
-	// const playerPressed = event.key;
 	const playerPressed = event.key;
+	console.log("player pressed", playerPressed);
+
+	// stope the game if pressed 'ESC'
+	if (playerPressed === "Escape") {
+		gameOver();
+	}
+
+	// key player is expected to press
 	console.log(event.key);
 
 	// get the expected to press
@@ -24,22 +31,18 @@ function handleKeyboardKeyUpEvent(event) {
 	if (playerPressed === expectedAlphabet) {
 		console.log("you get a point");
 
-        const currentScore = getTextElementValueById('current-score');
-        console.log(currentScore);
-        const updatedScore = currentScore + 1;
-        setTextElementById('current-score', updatedScore);
+		const currentScore = getTextElementValueById("current-score");
+		console.log(currentScore);
+		const updatedScore = currentScore + 1;
+		setTextElementById("current-score", updatedScore);
 
-
-
-
-
-        // -------------------------------------
+		// -------------------------------------
 		// update score:
 		// 1. get the current score
 		// const currentScoreElement = document.getElementById("current-score");
 		// const currentScoreText = currentScoreElement.innerText;
 		// const currentScore = parseInt(currentScoreText);
-        // const currentScore = getElementValueById('current-score');
+		// const currentScore = getElementValueById('current-score');
 
 		// // 2. increase the score by 1
 		const newScore = currentScore + 1;
@@ -53,15 +56,15 @@ function handleKeyboardKeyUpEvent(event) {
 	} else {
 		console.log("dhurrr vaia va apu...right key press koro");
 
-        constcurrentLife = getTextElementValueById('current-life');
-        const updatedLife = currentLife - 1;
-        setTextElementById('current-life', updatedLife);
+		const currentLife = getTextElementValueById("current-life");
+		const updatedLife = currentLife - 1;
+		setTextElementById("current-life", updatedLife);
 
-        if(updatedLife ===0){
+		if (updatedLife === 0) {
+			gameOver();
+		}
 
-        }
-
-        // --------------------------------------------
+		// --------------------------------------------
 		// step-1: get the current life number
 		// const currentLifeElement = document.getElementById('current-life');
 		// const currentLifeText = currentLifeElement.innerText;
@@ -85,25 +88,34 @@ function continueGame() {
 	const currentAlphabetElement = document.getElementById("current-alphabet");
 	currentAlphabetElement.innerText = alphabet;
 
-    // set background color
-    setBackgroundColorById(alphabet);
+	// set background color
+	setBackgroundColorById(alphabet);
 }
 
 function play() {
-    // hide everything show only the playground
+	// hide everything show only the playground
 	hideElementById("home-screen");
-    hideElementById('final-score');
+	hideElementById("final-score");
 	showElementById("play-ground");
 
-    // reset score and life
-    setTextElementById('current-life', 5);
-    setTextElementById('current-score', 0);
+	// reset score and life
+	setTextElementById("current-life", 5);
+	setTextElementById("current-score", 0);
 
 	continueGame();
 }
 
+function gameOver() {
+	hideElementById("play-ground");
+	showElementById("final-score");
+	// update final score
+	// 1.get the final score
+	const lastScore = getTextElementValueById("current-score");
+	console.log(lastScore);
+	setTextElementById("last-score", lastScore);
 
-function gameOver(){
-    hideElementById('play-ground');
-    showElementById('final-score');
+	// clear the last selected alphabet highlight
+	const currentAlphabet = getElementTextById("current-alphabet");
+	// console.log(currentAlphabet);
+	removeBackgroundColorById(currentAlphabet);
 }

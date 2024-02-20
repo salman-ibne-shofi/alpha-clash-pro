@@ -26,8 +26,13 @@ function getTextElementValueById(elementId) {
 }
 
 function setTextElementById(elementId, value) {
-	const element = document.getElementById(element);
+	const element = document.getElementById(elementId);
 	element.innerText = value;
+}
+
+function setElementTextById(elementId){
+    const element = document.getElementById(elementId);
+    element.innerText = value;
 }
 
 function getArandomAlphabet() {
